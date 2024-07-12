@@ -15,9 +15,8 @@ const productLogic = async (
   for (const company of config.COMPANIES) {
     //Creating the url for fetching the details by taking the given example in the pdf as context
     const url = `${config.BASE_URL}/${company}/categories/${category}/products?top=${n}&minPrice=${minPrice}&maxPrice=${maxPrice}`;
-
-    const res = await axios.getAdapter(url);
-    products.push(...res.data);
+    const response = await axios.get(url);
+    products.push(...response.data);
   }
 
   //Now writing the sorting Logic on the basis on Price
@@ -45,15 +44,9 @@ const productLogic = async (
 const getProductDetails = async (category, productId) => {
   for (const company of config.COMPANIES) {
     try {
-        const res = await axios.get('http://20.244.56.144/test/companies/AMZ/categories/Laptop/products', {
-            params: {
-              top: 10,
-              minPrice: 100,
-              maxPrice: 15000
-            }
-          });
-
-      return res.data;
+      const url = `${config.BASE_URL}/${company}/categories/${category}/products/${productId}`;
+      const response = await axios.get(url);
+      return response.data;
     } catch (error) {
       if (error.responses && error.responses.status !== 404) {
         throw error;
