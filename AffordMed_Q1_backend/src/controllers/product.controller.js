@@ -8,7 +8,7 @@ const getProducts = async (req, res, next) => {
         const {n = 10, page = 1, minPrice = 0, maxPrice = 20000, sort, order } = req.query;
 
         //Calling the main Logic fuction for sorting and filtering functionality
-        const products = await productLogic.getProducts(categoryname, parseInt(n), parseInt(page), parseFloat(minPrice), parseFloat(maxPrice), sort, order);
+        const products = await productLogic.productLogic(categoryname, parseInt(n), parseInt(page), parseFloat(minPrice), parseFloat(maxPrice), sort, order);
 
         return res,json(products);
     } catch (error) {
@@ -29,4 +29,9 @@ const getProductDetails = async (req, res, next) => {
     } catch (error) {
         next(error);
     }
+}
+
+module.exports = {
+    getProducts,
+    getProductDetails
 }

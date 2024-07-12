@@ -3,6 +3,7 @@ require("dotenv").config();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const erroHandler = require("./src/middlewares/errorHandler");
+const productRoutes = require("./src/routes/products.routes")
 
 
 const app = express();
